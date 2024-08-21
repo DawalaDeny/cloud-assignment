@@ -1,0 +1,5 @@
+docker/dockerfiles/backend/backend/
+.env
+env2
+env
+tf/*/.terraform/*

@@ -1,0 +1,34 @@
+#ook namespace
+environment: "production"
+
+mongo:
+  replicas: 1
+  image:
+    repository: "mongo"
+    tag: "latest"
+  deploymentPort: 27017
+  servicePort: 27017
+  name: "mongo"
+  type: "ClusterIP"
+
+frontend:
+  replicas: 1
+  image:
+    repository: "denyshabouev/cloud-infra-frontend"
+    tag: "latest"
+  deploymentPort: 80
+  servicePort: 80 
+  name: "front-end"
+  type: "LoadBalancer"
+
+backend:
+  replicas: 1
+  image:
+    repository: "denyshabouev/cloud-infra-backend"
+    tag: "latest"
+  deploymentPort: 3000
+  servicePort: 80
+  name: "back-end"
+  type: "LoadBalancer"
+
+

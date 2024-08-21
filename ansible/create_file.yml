@@ -1,0 +1,10 @@
+---
+- name: Creëer een testbestand
+  hosts: workers
+  become: true
+
+  tasks:
+    - name: bestand maken
+      copy:
+        content: "Dit is een testbestand."
+        dest: /test.txt

@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana-lb
+  annotations:
+    service.beta.kubernetes.io/oci-load-balancer-shape: "100Mbps"  # Pas dit aan afhankelijk van je behoeften
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+  selector:
+    app: prometheus-grafana

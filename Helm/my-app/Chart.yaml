@@ -1,0 +1,5 @@
+apiVersion: v2
+name: cloud-infra-app
+description: Helm chart voor cloud-infra app met frontend, backend en database
+version: "1"
+appVersion: "1"

@@ -1,0 +1,28 @@
+---
+- name: Install automatic updates using yum-cron
+  hosts: workers
+  become: true
+
+  tasks:
+    - name: Install yum-cron package
+      command: yum install -y yum-cron
+      ignore_errors: true
+
+    - name: Start and enable the yum-cron service
+      systemd:
+        name: yum-cron
+        state: started
+        enabled: yes
+
+    - name: Configure automatic updates
+      lineinfile:
+        path: /etc/yum/yum-cron.conf
+        regexp: '^apply_updates'
+        line: 'apply_updates = yes'
+      notify: Restart yum-cron
+
+  handlers:
+    - name: Restart yum-cron
+      systemd:
+        name: yum-cron
+        state: restarted

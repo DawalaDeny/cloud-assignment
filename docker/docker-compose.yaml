@@ -1,0 +1,28 @@
+version: '3.1'
+
+services:
+  mongo:
+    container_name: db
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    
+  backend:
+    image: denyshabouev/cloud-infra-backend:1
+    container_name: backend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo 
+    volumes:
+      - ./env/:/backend/env
+
+  frontend:
+    image: denyshabouev/cloud-infra-frontend:1
+    container_name: frontend
+    depends_on:
+      - backend 
+    ports:
+      - "80:80"
